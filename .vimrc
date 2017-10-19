@@ -2,8 +2,8 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=/c/Program\ Files/Git/usr/share/vim/vim80/bundle/Vundle.vim/
-call vundle#begin('/c/Program\ Files/Git/usr/share/vim/vim80/bundle/Vundle.vim')
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
@@ -40,7 +40,32 @@ Plugin 'moll/vim-bbye'
 Plugin 'scrooloose/syntastic'
 Plugin 'nvie/vim-flake8'
 Plugin 'vim-scripts/indentpython.vim'
+Plugin 'severin-lemaignan/vim-minimap'
+Plugin 'octol/vim-cpp-enhanced-highlight'
+let g:cpp_class_decl_highlight=1
+let g:cpp_member_variable_highlight=1
+
+"Plugin 'koron/minimap-vim'
 let python_highlight_all=1
+
+" Snipps
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" YouComplete
+Plugin 'Valloric/YouCompleteMe'
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+
+" Doxxx
+Plugin 'vim-scripts/DoxygenToolkit.vim'
+let g:DoxygenToolkit_briefTag_funcName="yes"
+let g:DoxygenToolkit_briefTag_pre="qk$a q73a-qj$"
+" let g:DoxygenToolkit_blockHeader='----------------------------------------------------------------------------'
+
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -79,13 +104,19 @@ inoremap zz q
 
 inoremap {<CR> {<CR>}<Esc>ko
 
+au InsertEnter * set number
+au InsertLeave * set relativenumber
+nmap <F8> :set norelativenumber <CR>
+
 vnoremap q <Esc>
 vnoremap zz q
 " ColorScheme
 "set term=xterm-256color
 "set t_Co=256
 syntax enable
-"set background=dark
+set background=dark
+"colorscheme atom-dark
+"colorscheme dracula
 colorscheme peachpuff
 "Remove all trailing whitespace by pressing F5
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
