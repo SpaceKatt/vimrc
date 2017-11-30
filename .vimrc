@@ -114,10 +114,18 @@ vnoremap zz q
 "set term=xterm-256color
 "set t_Co=256
 syntax enable
+
 set background=dark
 "colorscheme atom-dark
 "colorscheme dracula
-colorscheme peachpuff
+if &term=~'linux'
+  colorscheme peachpuff
+else
+  colorscheme atom-dark
+endif
+
+map <Leader>p :colorscheme atom-dark<CR>
+
 "Remove all trailing whitespace by pressing F5
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
