@@ -42,6 +42,9 @@ Plugin 'nvie/vim-flake8'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'severin-lemaignan/vim-minimap'
 Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'rust-lang/rust.vim'
+Plugin 'racer-rust/vim-racer'
+Plugin 'derekwyatt/vim-scala'
 let g:cpp_class_decl_highlight=1
 let g:cpp_member_variable_highlight=1
 
@@ -106,7 +109,11 @@ inoremap {<CR> {<CR>}<Esc>ko
 
 au InsertEnter * set number
 au InsertLeave * set relativenumber
+
+" Make line numbering absolute
 nmap <F8> :set norelativenumber <CR>
+" Set 68K assembely syntax support
+nmap <F9> :set ft=asm68k <CR>
 
 vnoremap q <Esc>
 vnoremap zz q
@@ -128,6 +135,8 @@ map <Leader>p :colorscheme atom-dark<CR>
 
 "Remove all trailing whitespace by pressing F5
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+nnoremap <F6> :%s;^\(\s\+\);\=repeat(' ', len(submatch(0))/2);g
+nnoremap <F4> :let b:syntastic_python_python_exec ='python3'
 
 " Show EOL type and last modified timestamp, right after the filename
 set statusline=%<%F%h%m%r\ [%{&ff}]\ (%{strftime(\"%H:%M\ %d/%m/%Y\",getftime(expand(\"%:p\")))})%=%l,%c%V\ %P
