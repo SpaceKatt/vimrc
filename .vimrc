@@ -1,3 +1,11 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""//,x^,"""""""""""""""""""""""""""""""""""""""""""""""""""//,x^,"""""""""
+""""""//*`"//""""""""""""""""""""""""""""""""""""""""""""""""""//*`"//"""""""""
+"""""//"""//==================================================//"""//""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" Mobile vim configuration awesome supreme """""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -52,6 +60,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'nvie/vim-flake8'
 Plugin 'vim-scripts/indentpython.vim'
 
+" C++ syntax highlighting
 Plugin 'octol/vim-cpp-enhanced-highlight'
 
 " 
@@ -80,6 +89,8 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " YouComplete
+" Note, on some systems YCM does not build. This can be solved by decreasing
+" the number of cores assigned to the build or create additional swap space
 Plugin 'Valloric/YouCompleteMe'
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
@@ -93,11 +104,6 @@ let g:DoxygenToolkit_briefTag_pre="qk$a q73a-qj$"
 "" End plugin definitions """""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" C++ syntax highlighting
-let g:cpp_class_decl_highlight=1
-let g:cpp_member_variable_highlight=1
-
-let python_highlight_all=1
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -117,9 +123,10 @@ filetype plugin indent on    " required
 "" End Vundle Configuration""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
 " Setting some decent VIM settings for programming
 "
-nmap <F7> :TagbarToggle<CR>
 set ai                          " set auto-indenting on for programming
 set showmatch                   " automatically show matching brackets. works like it does in bbedit.
 set vb                          " turn on the "visual bell" - which is much quieter than the "audio blink"
@@ -130,13 +137,10 @@ set nocompatible                " vi compatible is LAME
 set background=dark             " Use colours that work well on a dark background (Console is usually black)
 set showmode                    " show the current mode
 set clipboard=unnamed           " set clipboard to unnamed to access the system clipboard under windows
-set smartindent
-set tabstop=4
-set shiftwidth=4
-set expandtab
-set number
 syntax on                       " turn syntax highlighting on by default
 
+
+"""""""""""""""""""""""""""""""""
 " Remap q to switch to normal mode 
 vnoremap q <Esc>
 inoremap q <Esc>
@@ -144,45 +148,71 @@ inoremap q <Esc>
 inoremap zz q
 vnoremap zz q
 
-" 
-inoremap {<CR> {<CR>}<Esc>ko
 
+"""""""""""""""""""""""""""""""""
+" Should move this into file specific settings
+inoremap {<CR> {<CR>}<Esc>ko
+set smartindent
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set number
+nmap <F9> :set ft=asm68k <CR>
+nnoremap <F4> :let b:syntastic_python_python_exec ='python3'
+" color column
+set colorcolumn=80
+" Highlight things over 80 char
+match ErrorMsg /\%>79v.\+/
+
+let g:cpp_class_decl_highlight=1
+let g:cpp_member_variable_highlight=1
+let python_highlight_all=1
+
+
+"""""""""""""""""""""""""""""""""
+"" Line Numbering
 au InsertEnter * set number
 au InsertLeave * set relativenumber
 
 " Make line numbering absolute
 nmap <F8> :set norelativenumber <CR>
-" Set 68K assembely syntax support
-nmap <F9> :set ft=asm68k <CR>
 
-" ColorScheme
-"set term=xterm-256color
-"set t_Co=256
+
+"""""""""""""""""""""""""""""""""
+" ColorSchemeSchtuff
+" Syntax color enable
 syntax enable
 
+" Set correct color theme, of course dark themed
 set background=dark
-"colorscheme atom-dark
-"colorscheme dracula
+
+" Depending on the operating system, switch the color theme. Linux can
+" support atom-dark, while Windows cannot. atom-dark is my fav~
 if &term=~'linux'
   colorscheme peachpuff
 else
   colorscheme atom-dark
 endif
 
+" Press \p to switch to atom-dark
 map <Leader>p :colorscheme atom-dark<CR>
 
-"Remove all trailing whitespace by pressing F5
-nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
-nnoremap <F6> :%s;^\(\s\+\);\=repeat(' ', len(submatch(0))/2);g
-nnoremap <F4> :let b:syntastic_python_python_exec ='python3'
 
+"""""""""""""""""""""""""""""""""
+" Commonly needed hotkeys
+" Remove all trailing whitespace by pressing F5
+nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+" Turn 4-indent into 2-indent
+nnoremap <F6> :%s;^\(\s\+\);\=repeat(' ', len(submatch(0))/2);g
+" show functions and variables present in file
+" Need to checkout why this is calling Flake8 in python files
+nmap <F7> :TagbarToggle<CR>
+
+
+"""""""""""""""""""""""""""""""""
 " Show EOL type and last modified timestamp, right after the filename
 set statusline=%<%F%h%m%r\ [%{&ff}]\ (%{strftime(\"%H:%M\ %d/%m/%Y\",getftime(expand(\"%:p\")))})%=%l,%c%V\ %P
 
-" color column
-set colorcolumn=80
-" Highlight things over 80 char
-match ErrorMsg /\%>79v.\+/
 "------------------------------------------------------------------------------
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
@@ -209,3 +239,4 @@ if has("autocmd")
 
       autocmd Syntax gitcommit setlocal textwidth=74
 endif " has("autocmd")
+
