@@ -97,8 +97,12 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/
 " Doxxx
 Plugin 'vim-scripts/DoxygenToolkit.vim'
 let g:DoxygenToolkit_briefTag_funcName="yes"
-let g:DoxygenToolkit_briefTag_pre="qk$a q73a-qj$"
+"let g:DoxygenToolkit_briefTag_pre="qk$a q73a-qj$"
+let g:DoxygenToolkit_briefTag_pre="qk$aqj$"
 " let g:DoxygenToolkit_blockHeader='----------------------------------------------------------------------------'
+
+" ALE
+Plugin 'w0rp/ale'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" End plugin definitions """""""""""""""""""""""""""""""""""""""""""""""""""""
