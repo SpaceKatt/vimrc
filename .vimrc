@@ -54,11 +54,12 @@ Plugin 'dracula/vim'
 Plugin 'gosukiwi/vim-atom-dark'
 
 " Syntax highlighting, generic
-Plugin 'scrooloose/syntastic'
+"Plugin 'scrooloose/syntastic'
 
 " Python Junk
-Plugin 'nvie/vim-flake8'
-Plugin 'vim-scripts/indentpython.vim'
+"Plugin 'nvie/vim-flake8'
+"let g:syntastic_mode_map = { 'passive_filetypes': ['python'] }
+"Plugin 'vim-scripts/indentpython.vim'
 
 " C++ syntax highlighting
 Plugin 'octol/vim-cpp-enhanced-highlight'
@@ -76,6 +77,9 @@ Plugin 'severin-lemaignan/vim-minimap'
 " Rust syntax highlighting
 Plugin 'rust-lang/rust.vim'
 Plugin 'racer-rust/vim-racer'
+
+" csound
+Plugin 'luisjure/csound-vim'
 
 " I don't know...
 Plugin 'moll/vim-bbye'
@@ -162,7 +166,9 @@ set shiftwidth=4
 set expandtab
 set number
 nmap <F9> :set ft=asm68k <CR>
-nnoremap <F4> :let b:syntastic_python_python_exec ='python3'
+nnoremap <F4> :let b:syntastic_python_python_exec ='python3.6'
+
+let g:ale_linters = { 'python': ['flake8', 'mypy']}
 " color column
 set colorcolumn=80
 " Highlight things over 80 char
