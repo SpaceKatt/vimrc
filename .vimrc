@@ -70,6 +70,9 @@ Plugin 'majutsushi/tagbar'
 " Scala syntax highlighting
 Plugin 'derekwyatt/vim-scala'
 
+" TypeScript syntax highlighting
+Plugin 'leafgarland/typescript-vim'
+
 " Minimap (doesn't work too well)
 Plugin 'severin-lemaignan/vim-minimap'
 " Plugin 'koron/minimap-vim'
@@ -166,7 +169,7 @@ set shiftwidth=4
 set expandtab
 set number
 nmap <F9> :set ft=asm68k <CR>
-nnoremap <F4> :let b:syntastic_python_python_exec ='python3.6'
+" nnoremap <F4> :let b:syntastic_python_python_exec ='python3.6'
 
 let g:ale_linters = { 'python': ['flake8', 'mypy']}
 " color column
@@ -213,10 +216,13 @@ map <Leader>p :colorscheme atom-dark<CR>
 " Remove all trailing whitespace by pressing F5
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 " Turn 4-indent into 2-indent
-nnoremap <F6> :%s;^\(\s\+\);\=repeat(' ', len(submatch(0))/2);g
+nnoremap <F4> :%s;^\(\s\+\);\=repeat(' ', len(submatch(0))/2);g
 " show functions and variables present in file
 " Need to checkout why this is calling Flake8 in python files
 nmap <F7> :TagbarToggle<CR>
+
+set autoread
+nmap <F6> :checktime<CR>
 
 
 """""""""""""""""""""""""""""""""
