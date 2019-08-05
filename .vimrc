@@ -19,7 +19,6 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
@@ -110,6 +109,11 @@ let g:DoxygenToolkit_briefTag_pre="qk$aqj$"
 
 " ALE
 Plugin 'w0rp/ale'
+
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
+
+Plugin 'yggdroot/indentLine'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" End plugin definitions """""""""""""""""""""""""""""""""""""""""""""""""""""
